@@ -15,6 +15,9 @@ target_image = pygame.image.load("Images/meteor.png")
 target_width = 80
 target_height = 80
 
+hit_sound = pygame.mixer.Sound("Sounds/laser.mp3")
+
+
 target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
@@ -32,7 +35,8 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            if target_x < mouse_x < mouse_x+target_width and target_y < mouse_y < mouse_y+target_height:
+            if target_x < mouse_x < mouse_x+target_width and target_y < mouse_y < mouse_y+target_height:                # Воспроизводим звук попадания
+                hit_sound.play()
                 target_x = random.randint(0, SCREEN_WIDTH - target_width)
                 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
     screen.blit(target_image, (target_x, target_y))
